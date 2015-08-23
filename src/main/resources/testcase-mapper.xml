@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="self.family.dao.TestCaseDAO">
+    <resultMap id="TestCase" type="self.family.entry.TestCase" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="version" column="version"/>
+        <result property="caseName" column="case_name"/>
+        <result property="url" column="url"/>
+        <result property="requestMethod" column="request_method"/>
+        <result property="requestHeader" column="request_header"/>
+        <result property="requestCookie" column="request_cookie"/>
+        <result property="requestBody" column="request_body"/>
+        <result property="requestEncoding" column="request_encoding"/>
+        <result property="contentType" column="content_type"/>
+        <result property="responseResolver" column="response_resolver"/>
+        <result property="expectResponse" column="expect_response"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="findTestCasesByVersion" resultMap="TestCase" parameterType="String">
+        SELECT * FROM test_case WHERE version = #{version}
+    </select>
+    <select id="findTestCaseById" resultMap="TestCase" parameterType="Integer">
+        SELECT * FROM test_case WHERE id = #{id}
+    </select>
+    <insert id="addTestCase" parameterType="TestCase">
+        INSERT INTO test_case (version, case_name, url, request_method, request_header, request_cookie, request_body, request_encoding, content_type, response_resolver, expect_response, description, create_time, update_time)
+        VALUES (#{version}, #{caseName}, #{url}, #{requestMethod}, #{requestHeader}, #{requestCookie}, #{requestBody}, #{requestEncoding} #{contentType}, #{responseResolver}, #{expectResponse}, #{description}, #{createTime}, #{updateTime})
+    </insert>
+    <delete id="removeTestCase" parameterType="Integer">
+        DELETE FROM test_case WHERE id = #{id}
+    </delete>
+    <update id="updateTestCase" parameterType="TestCase">
+        UPDATE test_case SET version = #{version}, case_name = #{caseName}, url = #{url}, request_method = #{requestMethod}, request_header = #{requestHeader},
+        request_cookie = #{requestCookie}, request_body = #{requestBody}, request_encoding = #{requestEncoding}, content_type = #{contentType},
+        response_resolver = #{responseResolver}, expect_response = #{expectResponse}, description = #{description}, create_time = #{createTime},
+        update_time = #{updateTime} WHERE id = #{id}
+    </update>
+</mapper>
