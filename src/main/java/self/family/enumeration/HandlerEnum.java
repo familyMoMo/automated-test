@@ -8,7 +8,8 @@ import self.family.resolver.JSONResultResolver;
  */
 public enum HandlerEnum {
     JSON("json", "jSONResultResolver"),
-    CODE("code", "httpCodeResolver");
+    HTTPCODE("http-code", "httpCodeResolver"),
+    JSONCODE("json-code", "jSONCodeResolver");
 
 
     private String resolverName;
