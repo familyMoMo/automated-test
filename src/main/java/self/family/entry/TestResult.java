@@ -32,10 +32,6 @@ public class TestResult implements Serializable{
         this.createTime = createTime;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public int getId() {
         return id;
     }

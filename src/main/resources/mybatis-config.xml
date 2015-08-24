@@ -7,6 +7,7 @@
     <typeAliases>
         <typeAlias type="self.family.entry.TestCase" alias="TestCase"/>
         <typeAlias type="self.family.entry.TestResult" alias="TestResult"/>
+        <typeAlias type="self.family.entry.TestVersion" alias="TestVersion"/>
     </typeAliases>
     <mappers>
         <mapper resource="testcase-mapper.xml"/>

@@ -1,7 +1,5 @@
 package self.family.enumeration;
 
-import self.family.resolver.HttpCodeResolver;
-import self.family.resolver.JSONResultResolver;
 
 /**
  * Created by Administrator on 2015/8/23.

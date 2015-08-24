@@ -28,10 +28,6 @@ public class TestCase implements Serializable {
     public TestCase() {
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public int getId() {
         return id;
     }

@@ -15,7 +15,7 @@ import java.util.List;
 public class TestCaseServiceImpl implements TestCaseService {
 
     @Autowired
-    TestCaseDAO testCaseDAO;
+    private TestCaseDAO testCaseDAO;
     @Override
     public List<TestCase> findTestCasesByVersion(String version) {
         return testCaseDAO.findTestCasesByVersion(version);

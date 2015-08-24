@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="self.family.dao.TestVersionDAO">
+    <resultMap id="TestVersion" type="self.family.entry.TestVersion" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="version" column="version"/>
+    </resultMap>
+    <select id="findAllVersions" resultMap="TestVersion">
+        SELECT * FROM test_version
+    </select>
+    <insert id="addVersion" parameterType="TestVersion">
+        INSERT INTO test_version (version) VALUES (#{version})
+    </insert>
+</mapper>

@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class TestResultServiceImpl implements TestResultService {
     @Autowired
-    TestResultDAO testResultDAO;
+    private TestResultDAO testResultDAO;
     @Override
     public List<TestResult> findTestResultsByTag(int tag) {
         return testResultDAO.findTestResultsByTag(tag);
