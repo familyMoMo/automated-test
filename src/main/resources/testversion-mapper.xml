@@ -14,4 +14,7 @@
     <insert id="addVersion" parameterType="TestVersion">
         INSERT INTO test_version (version) VALUES (#{version})
     </insert>
+    <select id="findLatestVersion" resultMap="TestVersion">
+        SELECT * FROM test_version ORDER BY id DESC LIMIT 1
+    </select>
 </mapper>

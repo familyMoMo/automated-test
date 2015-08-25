@@ -10,11 +10,16 @@ import java.util.List;
  */
 @Component
 public class TestVersionDAO extends BaseDAO {
+
     public List<TestVersion> findAllVersions() {
         return getSqlSession().selectList("findAllVersions");
     }
 
     public boolean addVersion(TestVersion testVersion) {
         return getSqlSession().insert("addVersion", testVersion) == 1 ? true : false;
+    }
+
+    public TestVersion findLatestVersion() {
+        return getSqlSession().selectOne("findLatestVersion");
     }
 }

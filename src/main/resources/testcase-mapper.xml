@@ -29,7 +29,7 @@
     </select>
     <insert id="addTestCase" parameterType="TestCase">
         INSERT INTO test_case (version, case_name, url, request_method, request_header, request_cookie, request_body, request_encoding, content_type, response_resolver, expect_response, description, create_time, update_time)
-        VALUES (#{version}, #{caseName}, #{url}, #{requestMethod}, #{requestHeader}, #{requestCookie}, #{requestBody}, #{requestEncoding} #{contentType}, #{responseResolver}, #{expectResponse}, #{description}, #{createTime}, #{updateTime})
+        VALUES (#{version}, #{caseName}, #{url}, #{requestMethod}, #{requestHeader}, #{requestCookie}, #{requestBody}, #{requestEncoding}, #{contentType}, #{responseResolver}, #{expectResponse}, #{description}, #{createTime}, #{updateTime})
     </insert>
     <delete id="removeTestCase" parameterType="Integer">
         DELETE FROM test_case WHERE id = #{id}

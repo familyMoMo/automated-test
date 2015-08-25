@@ -11,4 +11,6 @@ public interface TestVersionService {
     public List<TestVersion> findAllVersions();
 
     public boolean addVersion(TestVersion testVersion);
+
+    public TestVersion findLatestVersion();
 }

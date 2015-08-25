@@ -12,5 +12,6 @@
     <mappers>
         <mapper resource="testcase-mapper.xml"/>
         <mapper resource="testresult-mapper.xml"/>
+        <mapper resource="testversion-mapper.xml"/>
     </mappers>
 </configuration>

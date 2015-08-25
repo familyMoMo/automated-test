@@ -25,4 +25,9 @@ public class TestVersionServiceImpl implements TestVersionService {
     public boolean addVersion(TestVersion testVersion) {
         return testVersionDAO.addVersion(testVersion);
     }
+
+    @Override
+    public TestVersion findLatestVersion() {
+        return testVersionDAO.findLatestVersion();
+    }
 }
