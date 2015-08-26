@@ -151,6 +151,13 @@
       <version>1.9.13</version>
     </dependency>
 
+    <!-- apache commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>automated-test</finalName>

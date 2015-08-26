@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import self.family.entry.PageVO;
 import self.family.entry.TestCase;
 import self.family.entry.TestResult;
 import self.family.entry.TestVersion;
@@ -11,7 +12,10 @@ import self.family.service.BusinessService;
 import self.family.service.TestCaseService;
 import self.family.service.TestResultService;
 import self.family.service.TestVersionService;
+import self.family.util.JsonUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,6 +37,9 @@ public class TestCaseController {
     @Autowired
     private BusinessService businessService;
 
+
+
+    @ResponseBody
     @RequestMapping(value = "findAllVersions")
     public List<TestVersion> findAllVersions() {
         return testVersionService.findAllVersions();
@@ -44,9 +51,17 @@ public class TestCaseController {
         return testVersionService.addVersion(testVersion);
     }
 
+    @ResponseBody
     @RequestMapping(value = "findTestCasesByVersion")
     public List<TestCase> findTestCasesByVersion(String version) {
         return testCaseService.findTestCasesByVersion(version);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "findPageCaseByVersion")
+    public String findPageCaseByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
+        String jsonp = request.getParameter("jsonCallback");
+        return jsonp+"(" + JsonUtil.toJson(testCaseService.findPageCaseByVersion(version, pageNumber, pageSize)) + ")";
     }
 
     @RequestMapping(value = "findTestCaseById")

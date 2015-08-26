@@ -3,7 +3,9 @@ package self.family.dao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import self.family.entry.TestCase;
+import self.family.util.JsonUtil;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -25,14 +27,17 @@ public class TestCaseDAOTest extends BaseTest {
 
     @Test
     public void testAddTestCase() throws Exception {
-        TestCase testCase = new TestCase();
-        testCase.setUrl("http://www.baidu.com");
-        testCase.setCaseName("lalala");
-        testCase.setVersion("1.0.1");
-        testCase.setRequestMethod("get");
-        testCase.setResponseResolver("http-code");
-        testCase.setExpectResponse("200");
-        System.out.println(testCaseDAO.addTestCase(testCase));
+        for (int i = 0; i < 50; i++) {
+            TestCase testCase = new TestCase();
+            testCase.setUrl("http://www.baidu.com");
+            testCase.setCaseName("lalala");
+            testCase.setVersion("1.0.1");
+            testCase.setRequestMethod("get");
+            testCase.setResponseResolver("http-code");
+            testCase.setExpectResponse("200");
+            System.out.println(testCaseDAO.addTestCase(testCase));
+        }
+
     }
 
     @Test
@@ -51,5 +56,23 @@ public class TestCaseDAOTest extends BaseTest {
         testCase.setResponseResolver("http-code");
         testCase.setExpectResponse("200");
         System.out.println(testCaseDAO.updateTestCase(testCase));
+    }
+
+    @Test
+    public void testPage() {
+        try {
+            System.out.println(JsonUtil.toJson(testCaseDAO.getPage(1, 10)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void findPageCaseByVersion() {
+        try {
+            System.out.println(JsonUtil.toJson(testCaseDAO.findPageCaseByVersion("1.0.1", 1, 10)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

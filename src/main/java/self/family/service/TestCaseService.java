@@ -1,5 +1,6 @@
 package self.family.service;
 
+import self.family.entry.PageVO;
 import self.family.entry.TestCase;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface TestCaseService {
     public boolean removeTestCase(int id);
 
     public boolean updateTestCase(TestCase testCase);
+
+    PageVO<TestCase> findPageCaseByVersion(String version, int pageNumber, int pageSize);
 }

@@ -3,6 +3,7 @@ package self.family.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import self.family.dao.TestCaseDAO;
+import self.family.entry.PageVO;
 import self.family.entry.TestCase;
 import self.family.service.TestCaseService;
 
@@ -39,5 +40,10 @@ public class TestCaseServiceImpl implements TestCaseService {
     @Override
     public boolean updateTestCase(TestCase testCase) {
         return testCaseDAO.updateTestCase(testCase);
+    }
+
+    @Override
+    public PageVO<TestCase> findPageCaseByVersion(String version, int pageNumber, int pageSize) {
+        return testCaseDAO.findPageCaseByVersion(version, pageNumber, pageSize);
     }
 }

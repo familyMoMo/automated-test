@@ -9,9 +9,14 @@
         <typeAlias type="self.family.entry.TestResult" alias="TestResult"/>
         <typeAlias type="self.family.entry.TestVersion" alias="TestVersion"/>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="self.family.interceptor.PageInterceptor">
+        </plugin>
+    </plugins>
     <mappers>
         <mapper resource="testcase-mapper.xml"/>
         <mapper resource="testresult-mapper.xml"/>
         <mapper resource="testversion-mapper.xml"/>
     </mappers>
+
 </configuration>

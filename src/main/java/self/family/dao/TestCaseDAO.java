@@ -3,9 +3,13 @@ package self.family.dao;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import self.family.entry.PageVO;
 import self.family.entry.TestCase;
+import self.family.entry.TestVersion;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/22.
@@ -31,5 +35,15 @@ public class TestCaseDAO extends BaseDAO{
 
     public boolean updateTestCase(TestCase testCase){
         return getSqlSession().update("updateTestCase", testCase) == 1 ? true : false;
+    }
+
+    public PageVO<TestCase> getPage(int pageNumber, int pageSize) {
+        return this.getPage("getPage", null, pageNumber, pageSize);
+    }
+
+    public PageVO<TestCase> findPageCaseByVersion(String version, int pageNumber, int pageSize) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("version", version);
+        return this.getPage("findPageCaseByVersion", map, pageNumber, pageSize);
     }
 }

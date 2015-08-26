@@ -21,6 +21,15 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
+    <select id="getPage" resultType="TestCase">
+        SELECT * FROM test_case
+    </select>
+    <select id="findPageCaseByVersion" parameterType="Map" resultType="TestCase">
+        SELECT * FROM test_case WHERE version = #{version} 
+        <if test="creatTime != null">
+            AND create_time = #{createTime}
+        </if>
+    </select>
     <select id="findTestCasesByVersion" resultMap="TestCase" parameterType="String">
         SELECT * FROM test_case WHERE version = #{version}
     </select>
