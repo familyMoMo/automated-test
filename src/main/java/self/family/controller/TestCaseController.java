@@ -2,6 +2,7 @@ package self.family.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import self.family.entry.PageVO;
@@ -37,7 +38,11 @@ public class TestCaseController {
     @Autowired
     private BusinessService businessService;
 
-
+    @RequestMapping(value = "index")
+    public String index(Model model) {
+        model.addAttribute("versions", testVersionService.findAllVersions());
+        return "testcase";
+    }
 
     @ResponseBody
     @RequestMapping(value = "findAllVersions")
@@ -58,10 +63,10 @@ public class TestCaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "findPageCaseByVersion")
-    public String findPageCaseByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
-        String jsonp = request.getParameter("jsonCallback");
-        return jsonp+"(" + JsonUtil.toJson(testCaseService.findPageCaseByVersion(version, pageNumber, pageSize)) + ")";
+    @RequestMapping(value = "findPageByVersion")
+    public PageVO<TestCase> findPageByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
+
+        return testCaseService.findPageCaseByVersion(version, pageNumber, pageSize);
     }
 
     @RequestMapping(value = "findTestCaseById")

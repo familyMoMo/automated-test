@@ -9,7 +9,7 @@
         <result property="version" column="version"/>
     </resultMap>
     <select id="findAllVersions" resultMap="TestVersion">
-        SELECT * FROM test_version
+        SELECT * FROM test_version ORDER BY id DESC
     </select>
     <insert id="addVersion" parameterType="TestVersion">
         INSERT INTO test_version (version) VALUES (#{version})

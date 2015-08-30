@@ -31,7 +31,7 @@ public class TestCaseDAOTest extends BaseTest {
             TestCase testCase = new TestCase();
             testCase.setUrl("http://www.baidu.com");
             testCase.setCaseName("lalala");
-            testCase.setVersion("1.0.1");
+            testCase.setVersion("1.0.2");
             testCase.setRequestMethod("get");
             testCase.setResponseResolver("http-code");
             testCase.setExpectResponse("200");
