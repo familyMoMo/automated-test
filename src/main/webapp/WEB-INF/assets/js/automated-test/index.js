@@ -8,19 +8,19 @@ $(document).ready(function(){
     ];
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
-    var version = $("#form-field-select-1").val();
+    var _version = $("#form-field-select-1").val();
 
     $("#search").click(function () {
-        version = $("#form-field-select-1").val();
-        _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version;
-        _caption = version + "版测试用例";
+        _version = $("#form-field-select-1").val();
+        _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + _version;
+        _caption = _version + "版测试用例";
         jQuery(grid_selector).setGridParam({url:_url, page:"1"}).setCaption(_caption).trigger("reloadGrid");
     });
 
 
     jQuery(grid_selector).jqGrid({
         //url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
-        url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version,
+        url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + _version,
         datatype: "json",
         colNames: grid_cloNames,
         colModel: [
@@ -29,12 +29,12 @@ $(document).ready(function(){
                 formatter: 'actions',
                 formatoptions: {
                     keys: true,
-                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
-                    editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
+                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback}
+                    //editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
                 }
             },
             {name: 'id', index: 'id', editable: false},
-            {name: 'version', index: 'version', editable: false, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'version', index: 'version', editable: false},
             {name: 'caseName', index: 'caseName', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
             {name: 'url', index: 'url', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
             {name: 'requestMethod', index: 'requestMethod', editable: true, edittype: "select", editoptions:{value:"GET:GET;POST:POST"}},
@@ -70,8 +70,8 @@ $(document).ready(function(){
             }, 0);
         },
 
-        editurl: $path_base + "/dummy.html",//nothing is saved
-        caption: version + "版测试用例",
+        editurl: "http://localhost:9090/automated/testcase/updateTestCase",//nothing is saved
+        caption: _version + "版测试用例",
         autowidth: true
     })
 
@@ -96,7 +96,6 @@ $(document).ready(function(){
                 .datepicker({format: 'yyyy-mm-dd', autoclose: true});
         }, 0);
     }
-
 
     //navButtons
     jQuery(grid_selector).jqGrid('navGrid', pager_selector,

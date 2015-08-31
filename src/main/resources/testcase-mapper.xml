@@ -24,7 +24,7 @@
     <select id="getPage" resultType="TestCase">
         SELECT * FROM test_case
     </select>
-    <select id="findPageCaseByVersion" parameterType="Map" resultType="TestCase">
+    <select id="findPageCaseByVersion" parameterType="Map" resultMap="TestCase">
         SELECT * FROM test_case WHERE version = #{version} 
     </select>
     <select id="findTestCasesByVersion" resultMap="TestCase" parameterType="String">
@@ -34,16 +34,15 @@
         SELECT * FROM test_case WHERE id = #{id}
     </select>
     <insert id="addTestCase" parameterType="TestCase">
-        INSERT INTO test_case (version, case_name, url, request_method, request_header, request_cookie, request_body, request_encoding, content_type, response_resolver, expect_response, description, create_time, update_time)
-        VALUES (#{version}, #{caseName}, #{url}, #{requestMethod}, #{requestHeader}, #{requestCookie}, #{requestBody}, #{requestEncoding}, #{contentType}, #{responseResolver}, #{expectResponse}, #{description}, #{createTime}, #{updateTime})
+        INSERT INTO test_case (version, case_name, url, request_method, request_header, request_cookie, request_body, request_encoding, content_type, response_resolver, expect_response, description, create_time)
+        VALUES (#{version}, #{caseName}, #{url}, #{requestMethod}, #{requestHeader}, #{requestCookie}, #{requestBody}, #{requestEncoding}, #{contentType}, #{responseResolver}, #{expectResponse}, #{description}, #{createTime})
     </insert>
     <delete id="removeTestCase" parameterType="Integer">
         DELETE FROM test_case WHERE id = #{id}
     </delete>
     <update id="updateTestCase" parameterType="TestCase">
-        UPDATE test_case SET version = #{version}, case_name = #{caseName}, url = #{url}, request_method = #{requestMethod}, request_header = #{requestHeader},
+        UPDATE test_case SET case_name = #{caseName}, url = #{url}, request_method = #{requestMethod}, request_header = #{requestHeader},
         request_cookie = #{requestCookie}, request_body = #{requestBody}, request_encoding = #{requestEncoding}, content_type = #{contentType},
-        response_resolver = #{responseResolver}, expect_response = #{expectResponse}, description = #{description}, create_time = #{createTime},
-        update_time = #{updateTime} WHERE id = #{id}
+        response_resolver = #{responseResolver}, expect_response = #{expectResponse}, description = #{description}, update_time = #{updateTime} WHERE id = #{id}
     </update>
 </mapper>

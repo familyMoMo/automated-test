@@ -15,8 +15,8 @@ public class TestCaseDAOTest extends BaseTest {
     TestCaseDAO testCaseDAO;
     @Test
     public void testFindTestCaseByVersion() throws Exception {
-        List<TestCase> testCases = testCaseDAO.findTestCasesByVersion("1.0.0");
-        System.out.println(testCases == null ? "null" : testCases.get(0).getVersion());
+        List<TestCase> testCases = testCaseDAO.findTestCasesByVersion("1.0.1");
+        System.out.println(JsonUtil.toJson(testCases));
     }
 
     @Test

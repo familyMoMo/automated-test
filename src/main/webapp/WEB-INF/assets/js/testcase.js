@@ -95,6 +95,14 @@ jQuery(function ($) {
         }, 0);
     }
 
+    var fn_editSubmit=function(response){
+        alert(response);//显示返回值
+    }
+
+    var editOptions={
+        top: 50, left: "100", width: 800
+        ,closeOnEscape: true, afterSubmit: fn_editSubmit
+    }
 
     //navButtons
     jQuery(grid_selector).jqGrid('navGrid', pager_selector,

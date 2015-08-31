@@ -71,11 +71,13 @@ public class TestCaseController {
 
     @ResponseBody
     @RequestMapping(value = "findPageByVersion")
-    public PageVO<TestCase> findPageByVersion(String version, HttpServletRequest request) {
+    public PageVO<TestCase> findPageByVersion(String version, int page, int rows, HttpServletRequest request) {
         // 取得当前页数,注意这是jqgrid自身的参数
         // 取得每页显示行数，,注意这是jqgrid自身的参数
-        return testCaseService.findPageCaseByVersion(version, Integer.parseInt(request.getParameter("page")), Integer.parseInt(request.getParameter("rows")));
+        return testCaseService.findPageCaseByVersion(version, page, rows);
     }
+
+
 
     @RequestMapping(value = "findTestCaseById")
     public TestCase findTestCaseById(int id) {
@@ -93,7 +95,13 @@ public class TestCaseController {
     }
 
     @RequestMapping(value = "updateTestCase")
+    @ResponseBody
     public boolean updateTestCase(TestCase testCase) {
+        try {
+            System.out.println(JsonUtil.toJson(testCase));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return testCaseService.updateTestCase(testCase);
     }
 
