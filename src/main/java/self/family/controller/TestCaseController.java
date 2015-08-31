@@ -62,11 +62,19 @@ public class TestCaseController {
         return testCaseService.findTestCasesByVersion(version);
     }
 
+//    @ResponseBody
+//    @RequestMapping(value = "findPageByVersion")
+//    public PageVO<TestCase> findPageByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
+//
+//        return testCaseService.findPageCaseByVersion(version, pageNumber, pageSize);
+//    }
+
     @ResponseBody
     @RequestMapping(value = "findPageByVersion")
-    public PageVO<TestCase> findPageByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
-
-        return testCaseService.findPageCaseByVersion(version, pageNumber, pageSize);
+    public PageVO<TestCase> findPageByVersion(String version, HttpServletRequest request) {
+        // 取得当前页数,注意这是jqgrid自身的参数
+        // 取得每页显示行数，,注意这是jqgrid自身的参数
+        return testCaseService.findPageCaseByVersion(version, Integer.parseInt(request.getParameter("page")), Integer.parseInt(request.getParameter("rows")));
     }
 
     @RequestMapping(value = "findTestCaseById")

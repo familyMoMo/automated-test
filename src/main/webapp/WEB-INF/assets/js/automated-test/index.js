@@ -12,66 +12,68 @@ $(document).ready(function(){
 
     $("#search").click(function () {
         version = $("#form-field-select-1").val();
-        _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10
-        jQuery(grid_selector).setGridParam({url:_url}).trigger("reloadGrid");
+        _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version;
+        _caption = version + "版测试用例";
+        jQuery(grid_selector).setGridParam({url:_url, page:"1"}).setCaption(_caption).trigger("reloadGrid");
     });
 
 
-        jQuery(grid_selector).jqGrid({
-            url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
-            datatype: "json",
-            colNames: grid_cloNames,
-            colModel: [
-                {
-                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize:false,
-                    formatter: 'actions',
-                    formatoptions: {
-                        keys: true,
-                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
-                        editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
-                    }
-                },
-                {name: 'id'},
-                {name: 'version'},
-                {name: 'caseName'},
-                {name: 'url'},
-                {name: 'requestMethod'},
-                {name: 'requestHeader'},
-                {name: 'requestCookie'},
-                {name: 'requestBody'},
-                {name: 'requestEncoding'},
-                {name: 'contentType'},
-                {name: 'responseResolver'},
-                {name: 'expectResponse'},
-                {name: 'description'},
-                {name: 'createTime'},
-                {name: 'updateTime'}
-            ],
-            viewrecords: true,
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            pager: pager_selector,
-            altRows: true,
-            //toppager: true,
-            height: 'auto',
-            multiselect: true,
-            //multikey: "ctrlKey",
-            multiboxonly: true,
-
-            loadComplete: function () {
-                var table = this;
-                setTimeout(function () {
-                    styleCheckbox(table);
-                    updateActionIcons(table);
-                    updatePagerIcons(table);
-                    enableTooltips(table);
-                }, 0);
+    jQuery(grid_selector).jqGrid({
+        //url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
+        url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version,
+        datatype: "json",
+        colNames: grid_cloNames,
+        colModel: [
+            {
+                name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize:false,
+                formatter: 'actions',
+                formatoptions: {
+                    keys: true,
+                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
+                    editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
+                }
             },
+            {name: 'id', index: 'id', editable: false},
+            {name: 'version', index: 'version', editable: false, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'caseName', index: 'caseName', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'url', index: 'url', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'requestMethod', index: 'requestMethod', editable: true, edittype: "select", editoptions:{value:"GET:GET;POST:POST"}},
+            {name: 'requestHeader', index: 'requestHeader', editable: true, edittype: 'text'},
+            {name: 'requestCookie', index: 'requestCookie', editable: true, edittype: 'text'},
+            {name: 'requestBody', index: 'requestBody', editable: true, edittype: 'text'},
+            {name: 'requestEncoding', index: 'requestEncoding', editable: true, edittype: 'text'},
+            {name: 'contentType', index: 'contentType', editable: true, edittype: 'text'},
+            {name: 'responseResolver', index: 'responseResolver', editable: true, edittype: 'select', editoptions:{value:"json:json;http-code:http-code;json-code:json-code"}},
+            {name: 'expectResponse', index: 'expectResponse', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'description', index: 'description', editable: true, edittype: 'text'},
+            {name: 'createTime', index: 'createTime', editable: false},
+            {name: 'updateTime', index: 'updateTime', editable: false}
+        ],
+        viewrecords: true,
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        pager: pager_selector,
+        altRows: true,
+        //toppager: true,
+        height: 'auto',
+        multiselect: true,
+        //multikey: "ctrlKey",
+        multiboxonly: true,
 
-            editurl: $path_base + "/dummy.html",//nothing is saved
-            caption: version + "版测试用例",
-            autowidth: true
-        })
+        loadComplete: function () {
+            var table = this;
+            setTimeout(function () {
+                styleCheckbox(table);
+                updateActionIcons(table);
+                updatePagerIcons(table);
+                enableTooltips(table);
+            }, 0);
+        },
+
+        editurl: $path_base + "/dummy.html",//nothing is saved
+        caption: version + "版测试用例",
+        autowidth: true
+    })
 
 
     //enable search/filter toolbar
