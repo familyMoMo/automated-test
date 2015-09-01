@@ -52,10 +52,10 @@ public class TestCaseController {
         return testVersionService.findAllVersions();
     }
 
-    @ResponseBody
     @RequestMapping(value = "addVersion")
-    public boolean addVersion(TestVersion testVersion) {
-        return testVersionService.addVersion(testVersion);
+    public String addVersion(TestVersion testVersion) {
+        testVersionService.addVersion(testVersion);
+        return "redirect:/testcase/index";
     }
 
     @ResponseBody

@@ -17,7 +17,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    WEB自动化测试用例
+                    WEB自动化测试
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -31,7 +31,7 @@
             <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-list"></i>
-                    <span class="menu-text"> 自动化测试用例</span>
+                    <span class="menu-text"> 自动化测试</span>
 
                     <b class="arrow icon-angle-down"></b>
                 </a>
@@ -77,8 +77,8 @@
                         </div>
                     </div>
                     <button id="search" type="button" class="btn btn-purple btn-sm">查询<i class="icon-search icon-on-right bigger-110"></i></button>
-                    <button id="create" type="submit" class="btn btn-purple btn-sm">创建新版本<i class="icon-search icon-on-right bigger-110"></i></button>
-                    <button id="excute" type="button" class="btn btn-purple btn-sm">执行该版本用例<i class="icon-search icon-on-right bigger-110"></i></button>
+                    <button id="create" type="submit" class="btn btn-purple btn-sm">创建新版本<i class=" icon-plus-sign-alt icon-on-right bigger-110"></i></button>
+                    <button id="excute" type="button" class="btn btn-purple btn-sm">执行该版本用例<i class=" icon-play icon-on-right bigger-110"></i></button>
                 </form>
             </div>
             <div class="row">
