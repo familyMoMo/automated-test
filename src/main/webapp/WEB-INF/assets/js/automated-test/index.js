@@ -13,10 +13,18 @@ $(document).ready(function(){
     $("#search").click(function () {
         _version = $("#form-field-select-1").val();
         _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + _version;
-        _caption = _version + "版测试用例";
-        jQuery(grid_selector).setGridParam({url:_url, page:"1"}).setCaption(_caption).trigger("reloadGrid");
+        _caption = _version + "版本测试用例";
+        _editurl = "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version;
+        jQuery(grid_selector).setGridParam({url:_url, editurl:_editurl, page:"1"}).setCaption(_caption).trigger("reloadGrid");
     });
 
+    $("#create").click(function() {
+
+    });
+
+    $("#excute").click(function() {
+
+    });
 
     jQuery(grid_selector).jqGrid({
         //url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
@@ -34,20 +42,20 @@ $(document).ready(function(){
                 }
             },
             {name: 'id', index: 'id', editable: false},
-            {name: 'version', index: 'version', editable: false},
-            {name: 'caseName', index: 'caseName', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
+            {name: 'version', index: 'version', editable: false, editoptions:{maxlength:50}},
+            {name: 'caseName', index: 'caseName', editable: true, edittype: 'text', editoptions:{maxlength:50}, editrules: {edithidden:true,required:true}},
             {name: 'url', index: 'url', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
             {name: 'requestMethod', index: 'requestMethod', editable: true, edittype: "select", editoptions:{value:"GET:GET;POST:POST"}},
             {name: 'requestHeader', index: 'requestHeader', editable: true, edittype: 'text'},
             {name: 'requestCookie', index: 'requestCookie', editable: true, edittype: 'text'},
             {name: 'requestBody', index: 'requestBody', editable: true, edittype: 'text'},
-            {name: 'requestEncoding', index: 'requestEncoding', editable: true, edittype: 'text'},
-            {name: 'contentType', index: 'contentType', editable: true, edittype: 'text'},
+            {name: 'requestEncoding', index: 'requestEncoding', editable: true, edittype: "select", editoptions:{value:"UTF-8:UTF-8;GBK:GBK"}},
+            {name: 'contentType', index: 'contentType', editable: true, edittype: "select", editoptions:{value:":无;application/x-www-form-urlencoded:application/x-www-form-urlencoded"}},
             {name: 'responseResolver', index: 'responseResolver', editable: true, edittype: 'select', editoptions:{value:"json:json;http-code:http-code;json-code:json-code"}},
             {name: 'expectResponse', index: 'expectResponse', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
             {name: 'description', index: 'description', editable: true, edittype: 'text'},
-            {name: 'createTime', index: 'createTime', editable: false},
-            {name: 'updateTime', index: 'updateTime', editable: false}
+            {name: 'createTime', index: 'createTime', editable: false, formatter:'date', formatoptions: {srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
+            {name: 'updateTime', index: 'updateTime', editable: false, formatter:'date', formatoptions: {srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}}
         ],
         viewrecords: true,
         rowNum: 10,
@@ -70,11 +78,10 @@ $(document).ready(function(){
             }, 0);
         },
 
-        editurl: "http://localhost:9090/automated/testcase/updateTestCase",//nothing is saved
-        caption: _version + "版测试用例",
+        editurl: "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version,
+        caption: _version + "版本测试用例",
         autowidth: true
     })
-
 
     //enable search/filter toolbar
     //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})

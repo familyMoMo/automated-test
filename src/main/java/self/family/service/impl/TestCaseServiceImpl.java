@@ -33,8 +33,8 @@ public class TestCaseServiceImpl implements TestCaseService {
     }
 
     @Override
-    public boolean removeTestCase(int id) {
-        return testCaseDAO.removeTestCase(id);
+    public boolean batchRemove(String[] ids) {
+        return testCaseDAO.batchRemove(ids);
     }
 
     @Override

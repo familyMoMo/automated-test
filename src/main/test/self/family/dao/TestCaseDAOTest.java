@@ -40,10 +40,10 @@ public class TestCaseDAOTest extends BaseTest {
 
     }
 
-    @Test
-    public void testRemoveTestCase() throws Exception {
-        System.out.println(testCaseDAO.removeTestCase(1));
-    }
+//    @Test
+//    public void testRemoveTestCase() throws Exception {
+//        System.out.println(testCaseDAO.removeTestCase(1));
+//    }
 
     @Test
     public void testUpdateTestCase() throws Exception {

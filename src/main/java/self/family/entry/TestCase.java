@@ -2,6 +2,9 @@ package self.family.entry;
 
 import java.io.Serializable;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 
 /**
  * Created by Administrator on 2015/8/22.
@@ -26,6 +29,39 @@ public class TestCase implements Serializable {
     private Date updateTime;
 
     public TestCase() {
+    }
+
+    public TestCase(String version, String caseName, String url, String requestMethod, String requestHeader, String requestCookie, String requestBody, String requestEncoding, String contentType, String responseResolver, String expectResponse, String description, Date createTime, Date updateTime) {
+        this.version = version;
+        this.caseName = caseName;
+        this.url = url;
+        this.requestMethod = requestMethod;
+        this.requestHeader = requestHeader;
+        this.requestCookie = requestCookie;
+        this.requestBody = requestBody;
+        this.requestEncoding = requestEncoding;
+        this.contentType = contentType;
+        this.responseResolver = responseResolver;
+        this.expectResponse = expectResponse;
+        this.description = description;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public TestCase(int id, String caseName, String url, String requestMethod, String requestHeader, String requestCookie, String requestBody, String requestEncoding, String contentType, String responseResolver, String expectResponse, String description, Date updateTime) {
+        this.id = id;
+        this.caseName = caseName;
+        this.url = url;
+        this.requestMethod = requestMethod;
+        this.requestHeader = requestHeader;
+        this.requestCookie = requestCookie;
+        this.requestBody = requestBody;
+        this.requestEncoding = requestEncoding;
+        this.contentType = contentType;
+        this.responseResolver = responseResolver;
+        this.expectResponse = expectResponse;
+        this.description = description;
+        this.updateTime = updateTime;
     }
 
     public int getId() {
@@ -132,6 +168,7 @@ public class TestCase implements Serializable {
         this.description = description;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     public Date getCreateTime() {
         return createTime;
     }
@@ -140,6 +177,7 @@ public class TestCase implements Serializable {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     public Date getUpdateTime() {
         return updateTime;
     }

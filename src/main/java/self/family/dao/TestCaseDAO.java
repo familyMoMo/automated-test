@@ -29,8 +29,8 @@ public class TestCaseDAO extends BaseDAO{
         return getSqlSession().insert("addTestCase", testCase) == 1 ? true : false;
     }
 
-    public boolean removeTestCase(int id){
-        return getSqlSession().delete("removeTestCase", id) == 1 ? true : false;
+    public boolean batchRemove(String[] ids){
+        return getSqlSession().delete("batchRemove", ids) == ids.length ? true : false;
     }
 
     public boolean updateTestCase(TestCase testCase){

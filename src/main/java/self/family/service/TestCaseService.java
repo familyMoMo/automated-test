@@ -15,7 +15,7 @@ public interface TestCaseService {
 
     public boolean addTestCase(TestCase testCase);
 
-    public boolean removeTestCase(int id);
+    public boolean batchRemove(String[] ids);
 
     public boolean updateTestCase(TestCase testCase);
 

@@ -17,7 +17,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    WEB自动化测试
+                    WEB自动化测试用例
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -31,7 +31,7 @@
             <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-list"></i>
-                    <span class="menu-text"> 自动化测试 </span>
+                    <span class="menu-text"> 自动化测试用例</span>
 
                     <b class="arrow icon-angle-down"></b>
                 </a>
@@ -58,7 +58,7 @@
                 </li>
 
                 <li>
-                    <a href="grid.html">自动化测试</a>
+                    <a href="grid.html">自动化测试用例</a>
                 </li>
                 <li class="active">测试用例</li>
             </ul>
@@ -67,7 +67,7 @@
             <div class="page-header">
                 <form class="form-inline">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label no-padding-right" for="form-field-select-1">版本号</label>
+                        <label class="col-sm-4 control-label no-padding-right" for="form-field-select-1">用例版本</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="form-field-select-1">
                                 <#list versions as version>
@@ -77,6 +77,8 @@
                         </div>
                     </div>
                     <button id="search" type="button" class="btn btn-purple btn-sm">查询<i class="icon-search icon-on-right bigger-110"></i></button>
+                    <button id="create" type="submit" class="btn btn-purple btn-sm">创建新版本<i class="icon-search icon-on-right bigger-110"></i></button>
+                    <button id="excute" type="button" class="btn btn-purple btn-sm">执行该版本用例<i class="icon-search icon-on-right bigger-110"></i></button>
                 </form>
             </div>
             <div class="row">

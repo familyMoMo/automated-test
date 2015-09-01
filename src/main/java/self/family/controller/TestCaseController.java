@@ -17,6 +17,8 @@ import self.family.util.JsonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -72,8 +74,6 @@ public class TestCaseController {
     @ResponseBody
     @RequestMapping(value = "findPageByVersion")
     public PageVO<TestCase> findPageByVersion(String version, int page, int rows, HttpServletRequest request) {
-        // 取得当前页数,注意这是jqgrid自身的参数
-        // 取得每页显示行数，,注意这是jqgrid自身的参数
         return testCaseService.findPageCaseByVersion(version, page, rows);
     }
 
@@ -89,20 +89,33 @@ public class TestCaseController {
         return testCaseService.addTestCase(testCase);
     }
 
-    @RequestMapping(value = "removeTestCase")
-    public boolean removeTestCase(int id) {
-        return testCaseService.removeTestCase(id);
-    }
+//    @RequestMapping(value = "removeTestCase")
+//    public boolean removeTestCase(int id) {
+//        return testCaseService.removeTestCase(id);
+//    }
 
-    @RequestMapping(value = "updateTestCase")
     @ResponseBody
-    public boolean updateTestCase(TestCase testCase) {
-        try {
-            System.out.println(JsonUtil.toJson(testCase));
-        } catch (IOException e) {
-            e.printStackTrace();
+    @RequestMapping(value = "updateTestCase")
+    public boolean updateTestCase(HttpServletRequest request) {
+        String oper = request.getParameter("oper");
+        if (oper.equalsIgnoreCase("edit")) {
+            TestCase testCase = new TestCase(Integer.parseInt(request.getParameter("id")), request.getParameter("caseName"), request.getParameter("url"),
+                    request.getParameter("requestMethod"), request.getParameter("requestHeader"), request.getParameter("requestCookie"),
+                    request.getParameter("requestBody"), request.getParameter("requestEncoding"), request.getParameter("contentType"),
+                    request.getParameter("responseResolver"), request.getParameter("expectResponse"), request.getParameter("description"),
+                    new Date());
+            return testCaseService.updateTestCase(testCase);
+        } else if (oper.equalsIgnoreCase("add")) {
+            TestCase testCase = new TestCase(request.getParameter("version"), request.getParameter("caseName"), request.getParameter("url"),
+                    request.getParameter("requestMethod"), request.getParameter("requestHeader"), request.getParameter("requestCookie"),
+                    request.getParameter("requestBody"), request.getParameter("requestEncoding"), request.getParameter("contentType"),
+                    request.getParameter("responseResolver"), request.getParameter("expectResponse"), request.getParameter("description"),
+                    new Date(), new Date());
+            return testCaseService.addTestCase(testCase);
+        } else if (oper.equalsIgnoreCase("del")) {
+            return testCaseService.batchRemove(request.getParameter("id").split(","));
         }
-        return testCaseService.updateTestCase(testCase);
+        return false;
     }
 
     @RequestMapping(value = "excuteTestCase")
