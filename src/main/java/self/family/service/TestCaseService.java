@@ -19,5 +19,5 @@ public interface TestCaseService {
 
     public boolean updateTestCase(TestCase testCase);
 
-    PageVO<TestCase> findPageCaseByVersion(String version, int pageNumber, int pageSize);
+    public PageVO<TestCase> findPageCaseByVersion(String version, int pageNumber, int pageSize);
 }

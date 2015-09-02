@@ -46,12 +46,6 @@ public class TestCaseController {
         return "testcase";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "findAllVersions")
-    public List<TestVersion> findAllVersions() {
-        return testVersionService.findAllVersions();
-    }
-
     @RequestMapping(value = "addVersion")
     public String addVersion(TestVersion testVersion) {
         testVersionService.addVersion(testVersion);
@@ -59,40 +53,10 @@ public class TestCaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "findTestCasesByVersion")
-    public List<TestCase> findTestCasesByVersion(String version) {
-        return testCaseService.findTestCasesByVersion(version);
-    }
-
-//    @ResponseBody
-//    @RequestMapping(value = "findPageByVersion")
-//    public PageVO<TestCase> findPageByVersion(String version, int pageNumber, int pageSize, HttpServletRequest request) throws IOException {
-//
-//        return testCaseService.findPageCaseByVersion(version, pageNumber, pageSize);
-//    }
-
-    @ResponseBody
     @RequestMapping(value = "findPageByVersion")
     public PageVO<TestCase> findPageByVersion(String version, int page, int rows, HttpServletRequest request) {
         return testCaseService.findPageCaseByVersion(version, page, rows);
     }
-
-
-
-    @RequestMapping(value = "findTestCaseById")
-    public TestCase findTestCaseById(int id) {
-        return testCaseService.findTestCaseById(id);
-    }
-
-    @RequestMapping(value = "addTestCase")
-    public boolean addTestCase(TestCase testCase) {
-        return testCaseService.addTestCase(testCase);
-    }
-
-//    @RequestMapping(value = "removeTestCase")
-//    public boolean removeTestCase(int id) {
-//        return testCaseService.removeTestCase(id);
-//    }
 
     @ResponseBody
     @RequestMapping(value = "updateTestCase")
@@ -119,13 +83,15 @@ public class TestCaseController {
     }
 
     @RequestMapping(value = "excuteTestCase")
-    public List<TestResult> excute(List<TestCase> testCaseList, String tagName) {
-        return businessService.excute(testCaseList, tagName);
+    public List<TestResult> excute(String version, String tagName) {
+        System.out.println(version + "---" + tagName);
+        return businessService.excute(testCaseService.findTestCasesByVersion(version), tagName);
     }
 
-    @RequestMapping(value = "findTestResultsByTag")
-    public List<TestResult> findTestResultsByTag(int tag) {
-        return testResultService.findTestResultsByTag(tag);
+    @ResponseBody
+    @RequestMapping(value = "findPageResultByTag")
+    public PageVO<TestResult> findPageResultByTag(int tag, int page, int rows) {
+        return testResultService.findPageResultByTag(tag, page, rows);
     }
 
     @RequestMapping(value = "removeTestResultsByTag")

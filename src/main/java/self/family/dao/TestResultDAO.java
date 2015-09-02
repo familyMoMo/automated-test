@@ -1,9 +1,12 @@
 package self.family.dao;
 
 import org.springframework.stereotype.Component;
+import self.family.entry.PageVO;
 import self.family.entry.TestResult;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/22.
@@ -29,5 +32,15 @@ public class TestResultDAO extends BaseDAO{
 
     public boolean batchAdd(List<TestResult> testResults) {
         return getSqlSession().insert("batchAdd", testResults) == testResults.size() ? true : false;
+    }
+
+    public PageVO<TestResult> getPage(int pageNumber, int pageSize) {
+        return this.getPage("getPage", null, pageNumber, pageSize);
+    }
+
+    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tag", tag);
+        return this.getPage("findPageResultByTag", map, pageNumber, pageSize);
     }
 }

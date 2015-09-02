@@ -8,7 +8,6 @@
     <link href="../assets/css/ui.jqgrid.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
     <link href="../assets/css/ace.min.css" rel="stylesheet">
-
 </head>
 <body>
 <div class="navbar navbar-default" id="navbar">
@@ -77,7 +76,7 @@
                         </div>
                     </div>
                     <button id="search" type="button" class="btn btn-purple btn-sm">查询<i class="icon-search icon-on-right bigger-110"></i></button>
-                    <button id="create" type="submit" class="btn btn-purple btn-sm">创建新版本<i class=" icon-plus-sign-alt icon-on-right bigger-110"></i></button>
+                    <button id="create" type="button" class="btn btn-purple btn-sm">创建新版本<i class=" icon-plus-sign-alt icon-on-right bigger-110"></i></button>
                     <button id="excute" type="button" class="btn btn-purple btn-sm">执行该版本用例<i class=" icon-play icon-on-right bigger-110"></i></button>
                 </form>
             </div>
@@ -100,7 +99,35 @@
                 </script>
                 <!-- PAGE CONTENT ENDS -->
             </div><!-- /.col -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+
+                    <div class="alert alert-danger" style="display: none">
+                        <i class="icon-hand-right"></i>
+                        错误提示
+                        <button class="close" data-dismiss="alert">
+                            <i class="icon-remove"></i>
+                        </button>
+                    </div>
+                    <table id="result-grid-table"></table>
+                    <div id="result-grid-pager"></div>
+                </div>
+                <script type="text/javascript">
+                    var $path_base = "/";//this will be used in gritter alerts containing images
+                </script>
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
         </div><!-- /.row -->
+        <div id="versionwrap">
+            <form id="versionform" role="form" method="post" action="http://localhost:9090/automated/testcase/addVersion">
+                <div class="form-group">
+                    <label for="version">Version</label>
+                    <input type="version" class="form-control"
+                           id="version" name="version">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </div>
@@ -111,8 +138,8 @@
 <script src="../assets/js/date-time/bootstrap-datepicker.min.js"></script>
 <script src="../assets/js/ace.min.js"></script>
 <script src="../assets/js/ace-extra.min.js"></script>
+<script src="../assets/js/jquery.bootstrap.min.js"></script>
 
-<#--<script src="../assets/js/testcase.js"></script>-->
 <script src="../assets/js/automated-test/index.js"></script>
 </body>
 </html>

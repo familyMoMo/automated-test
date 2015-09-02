@@ -6,8 +6,13 @@ $(document).ready(function(){
         'requestBody', 'requestEncoding', 'contentType', 'responseResolver', 'expectResponse', 'description',
         'createTime', 'updateTime'
     ];
+    var result_grid_cloNames = ['操作', 'ID', 'caseId', 'caseName', 'expectResponse', 'actualResponse', 'result', 'tag',
+        'tagName', 'createTime'
+    ];
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
+    var result_grid_selector = "#result-grid-table";
+    var result_pager_selector = "#result-grid-pager";
     var _version = $("#form-field-select-1").val();
 
     $("#search").click(function () {
@@ -19,11 +24,35 @@ $(document).ready(function(){
     });
 
     $("#create").click(function() {
-
+        $("#versionwrap").dialog("open");
     });
 
     $("#excute").click(function() {
+        _version = $("#form-field-select-1").val();
+        $.ajax({
+            url: "http://localhost:9090/automated/testcase/excuteTestCase?version=" + _version + "&tagName=testaaa"
+        })
+    });
 
+    $("#versionwrap").dialog({
+        autoOpen: false
+        , title:    "Add Version"
+        , dialogClass : "modal-sm"
+        //, 'class':  "mydialog"  /*add custom class for this dialog*/
+        , onClose: function() { $(this).dialog("close"); }
+        , buttons: [
+
+            {
+                text: "Add"
+                , 'class': "btn-success"
+                , click: function() {
+                /*your login handler*/
+                //console.log($("#version").val());
+                $("#versionform").submit();
+                $(this).dialog("close");
+            }
+            }
+        ]
     });
 
     jQuery(grid_selector).jqGrid({
@@ -80,6 +109,57 @@ $(document).ready(function(){
 
         editurl: "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version,
         caption: _version + "版本测试用例",
+        autowidth: true
+    })
+
+    jQuery(result_grid_selector).jqGrid({
+        //url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
+        url : "http://localhost:9090/automated/testcase/findPageResultByTag?tag=1",
+        datatype: "json",
+        colNames: result_grid_cloNames,
+        colModel: [
+            {
+                name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize:false,
+                formatter: 'actions',
+                formatoptions: {
+                    keys: true,
+                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback}
+                    //editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
+                }
+            },
+            {name: 'id', index: 'id'},
+            {name: 'caseId', index: 'caseId'},
+            {name: 'caseName', index: 'caseName'},
+            {name: 'expectResponse', index: 'expectResponse'},
+            {name: 'actualResponse', index: 'actualResponse'},
+            {name: 'result', index: 'result'},
+            {name: 'tag', index: 'tag'},
+            {name: 'tagName', index: 'tagName'},
+            {name: 'createTime', index: 'createTime'}
+        ],
+        viewrecords: true,
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        pager: result_pager_selector,
+        altRows: true,
+        //toppager: true,
+        height: 'auto',
+        multiselect: true,
+        //multikey: "ctrlKey",
+        multiboxonly: true,
+
+        loadComplete: function () {
+            var table = this;
+            setTimeout(function () {
+                styleCheckbox(table);
+                updateActionIcons(table);
+                updatePagerIcons(table);
+                enableTooltips(table);
+            }, 0);
+        },
+
+        //editurl: "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version,
+        caption: "执行结果",
         autowidth: true
     })
 

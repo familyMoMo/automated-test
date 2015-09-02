@@ -1,5 +1,7 @@
 package self.family.service;
 
+import org.junit.Test;
+import self.family.entry.PageVO;
 import self.family.entry.TestResult;
 
 import java.util.List;
@@ -17,4 +19,6 @@ public interface TestResultService {
     public boolean addTestResult(TestResult testResult);
 
     public boolean batchAdd(List<TestResult> testResults);
+
+    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize);
 }

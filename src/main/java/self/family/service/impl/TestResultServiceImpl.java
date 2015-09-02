@@ -3,6 +3,7 @@ package self.family.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import self.family.dao.TestResultDAO;
+import self.family.entry.PageVO;
 import self.family.entry.TestResult;
 import self.family.service.TestResultService;
 
@@ -38,6 +39,11 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
     public boolean batchAdd(List<TestResult> testResults) {
         return testResultDAO.batchAdd(testResults);
+    }
+
+    @Override
+    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize) {
+        return testResultDAO.findPageResultByTag(tag, pageNumber, pageSize);
     }
 
 
