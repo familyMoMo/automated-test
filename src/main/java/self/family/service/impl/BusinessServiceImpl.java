@@ -30,7 +30,7 @@ public class BusinessServiceImpl implements BusinessService {
     private TestResult excute(TestCase testCase, String tagName) {
         try {
             HttpResponse httpResponse = TestCaseHttpUtil.execute(testCase);
-            String resolverName = HandlerEnum.getEnum(testCase.getResponseResolver()).getResolverName();
+            String resolverName = HandlerEnum.getEnum(testCase.getResponseResolver()).getBeanName();
             BaseResolver resolver = (BaseResolver) SpringContextUtil.getBean(resolverName);
             String actualResponse = resolver.handle(httpResponse);
             return new TestResult(testCase.getId(), testCase.getCaseName(), testCase.getExpectResponse(), actualResponse,

@@ -15,17 +15,26 @@
         <result property="tagName" column="tag_name"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
-    <select id="getPage" resultType="TestResult">
+    <select id="getPage" resultMap="TestResult">
         SELECT * FROM test_result
     </select>
-    <select id="findPageResultByTag" parameterType="Map" resultMap="TestResult">
-        SELECT * FROM test_result WHERE tag = #{tag}
+    <select id="getAllTagNames" resultType="String">
+        SELECT DISTINCT tag_name FROM test_result ORDER BY id DESC
+    </select>
+    <select id="findPageResultByTagName" parameterType="Map" resultMap="TestResult">
+        SELECT * FROM test_result WHERE tag_name = #{tagName}
     </select>
     <select id="findTestResultsByTag" resultMap="TestResult" parameterType="Integer">
         SELECT * FROM test_result WHERE tag = #{tag}
     </select>
-    <delete id="removeTestResultsByTag" parameterType="Integer">
-        DELETE FROM test_result WHERE tag = #{tag}
+    <delete id="removeTestResultsByTagName" parameterType="String">
+        DELETE FROM test_result WHERE tag_name = #{tagName}
+    </delete>
+    <delete id="batchRemoveResult" parameterType="String">
+        DELETE FROM test_result WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
     <select id="findMaxTag" resultType="Object" >
         SELECT MAX(tag) FROM test_result

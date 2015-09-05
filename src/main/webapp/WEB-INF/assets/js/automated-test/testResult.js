@@ -1,108 +1,38 @@
-/**
- * Created by Administrator on 2015/8/29.
- */
-$(document).ready(function(){
-    var grid_cloNames = ['操作', 'ID', 'version', 'caseName', 'url', 'requestMethod', 'requestHeader','requestCookie',
-        'requestBody', 'requestEncoding', 'contentType', 'responseResolver', 'expectResponse', 'description',
-        'createTime', 'updateTime'
+$(document).ready(function() {
+    var result_grid_cloNames = ['ID', 'caseId', 'caseName', 'expectResponse', 'actualResponse', 'result', 'tag',
+        'tagName', 'createTime'
     ];
-    var grid_selector = "#grid-table";
-    var pager_selector = "#grid-pager";
-    var _version = $("#form-field-select-1").val();
+    var result_grid_selector = "#result-grid-table";
+    var result_pager_selector = "#result-grid-pager";
+    var _tagName = $("#form-field-select-1").val();
 
     $("#search").click(function () {
-        _version = $("#form-field-select-1").val();
-        _url = "http://localhost:9090/automated/testcase/findPageByVersion?version=" + _version;
-        _caption = _version + "版本测试用例";
-        _editurl = "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version;
-        jQuery(grid_selector).setGridParam({url:_url, editurl:_editurl, page:"1"}).setCaption(_caption).trigger("reloadGrid");
+        _tagName = $("#form-field-select-1").val();
+        _url = "http://localhost:9090/automated/testcase/findPageResultByTagName?tagName=" + _tagName;
+        //_caption = _version + "版本测试用例";
+        //_editurl = "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version;
+        jQuery(result_grid_selector).setGridParam({url:_url, page:"1"}).trigger("reloadGrid");
     });
 
-    $("#create").click(function() {
-        $("#versionwrap").dialog("open");
-    });
-
-    $("#excute").click(function() {
-        $("#tagnamewrap").dialog("open");
-    });
-
-    $("#tagnamewrap").dialog({
-        autoOpen: false
-        , title:    "Add Tag Name And Excute"
-        , dialogClass : "modal-sm"
-        //, 'class':  "mydialog"  /*add custom class for this dialog*/
-        , onClose: function() { $(this).dialog("close"); }
-        , buttons: [
-
-            {
-                text: "Add&Excute"
-                , 'class': "btn-success"
-                , click: function() {
-                /*your login handler*/
-                $("#hideVersion").val($("#form-field-select-1").val());
-                $("#tagnameform").submit();
-                $(this).dialog("close");
-            }
-            }
-        ]
-    });
-
-    $("#versionwrap").dialog({
-        autoOpen: false
-        , title:    "Add Version"
-        , dialogClass : "modal-sm"
-        //, 'class':  "mydialog"  /*add custom class for this dialog*/
-        , onClose: function() { $(this).dialog("close"); }
-        , buttons: [
-
-            {
-                text: "Add"
-                , 'class': "btn-success"
-                , click: function() {
-                /*your login handler*/
-                //console.log($("#version").val());
-                $("#versionform").submit();
-                $(this).dialog("close");
-            }
-            }
-        ]
-    });
-
-    jQuery(grid_selector).jqGrid({
-        //url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + version + "&pageNumber="+1+"&pageSize="+ 10,
-        url : "http://localhost:9090/automated/testcase/findPageByVersion?version=" + _version,
+    jQuery(result_grid_selector).jqGrid({
+        url : "http://localhost:9090/automated/testcase/findPageResultByTagName?tagName=" + _tagName,
         datatype: "json",
-        colNames: grid_cloNames,
+        colNames: result_grid_cloNames,
         colModel: [
-            {
-                name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize:false,
-                formatter: 'actions',
-                formatoptions: {
-                    keys: true,
-                    delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback}
-                    //editformbutton: true, editOptions: {recreateForm: true, beforeShowForm: beforeEditCallback}
-                }
-            },
-            {name: 'id', index: 'id', editable: false},
-            {name: 'version', index: 'version', editable: false, editoptions:{maxlength:50}},
-            {name: 'caseName', index: 'caseName', editable: true, edittype: 'text', editoptions:{maxlength:50}, editrules: {edithidden:true,required:true}},
-            {name: 'url', index: 'url', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
-            {name: 'requestMethod', index: 'requestMethod', editable: true, edittype: "select", editoptions:{value:"GET:GET;POST:POST"}},
-            {name: 'requestHeader', index: 'requestHeader', editable: true, edittype: 'text'},
-            {name: 'requestCookie', index: 'requestCookie', editable: true, edittype: 'text'},
-            {name: 'requestBody', index: 'requestBody', editable: true, edittype: 'text'},
-            {name: 'requestEncoding', index: 'requestEncoding', editable: true, edittype: "select", editoptions:{value:"UTF-8:UTF-8;GBK:GBK"}},
-            {name: 'contentType', index: 'contentType', editable: true, edittype: "select", editoptions:{value:":无;application/x-www-form-urlencoded:application/x-www-form-urlencoded"}},
-            {name: 'responseResolver', index: 'responseResolver', editable: true, edittype: 'select', editoptions:{value:"json:json;http-code:http-code;json-code:json-code"}},
-            {name: 'expectResponse', index: 'expectResponse', editable: true, edittype: 'text', editrules: {edithidden:true,required:true}},
-            {name: 'description', index: 'description', editable: true, edittype: 'text'},
-            {name: 'createTime', index: 'createTime', editable: false, formatter:'date', formatoptions: {srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-            {name: 'updateTime', index: 'updateTime', editable: false, formatter:'date', formatoptions: {srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}}
+            {name: 'id', index: 'id'},
+            {name: 'caseId', index: 'caseId'},
+            {name: 'caseName', index: 'caseName'},
+            {name: 'expectResponse', index: 'expectResponse'},
+            {name: 'actualResponse', index: 'actualResponse'},
+            {name: 'result', index: 'result'},
+            {name: 'tag', index: 'tag'},
+            {name: 'tagName', index: 'tagName'},
+            {name: 'createTime', index: 'createTime', formatter:'date', formatoptions: {srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}}
         ],
         viewrecords: true,
         rowNum: 10,
         rowList: [10, 20, 30],
-        pager: pager_selector,
+        pager: result_pager_selector,
         altRows: true,
         //toppager: true,
         height: 'auto',
@@ -120,12 +50,10 @@ $(document).ready(function(){
             }, 0);
         },
 
-        editurl: "http://localhost:9090/automated/testcase/updateTestCase?version=" + _version,
-        caption: _version + "版本测试用例",
+        editurl: "http://localhost:9090/automated/testcase/updateTestResult",
+        caption: "执行结果",
         autowidth: true
     })
-
-
 
     //enable search/filter toolbar
     //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
@@ -149,12 +77,12 @@ $(document).ready(function(){
     }
 
     //navButtons
-    jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+    jQuery(result_grid_selector).jqGrid('navGrid', result_pager_selector,
         { 	//navbar options
-            edit: true,
-            editicon: 'icon-pencil blue',
-            add: true,
-            addicon: 'icon-plus-sign purple',
+            edit: false,
+            //editicon: 'icon-pencil blue',
+            add: false,
+            //addicon: 'icon-plus-sign purple',
             del: true,
             delicon: 'icon-trash red',
             search: true,
@@ -164,27 +92,27 @@ $(document).ready(function(){
             view: true,
             viewicon: 'icon-zoom-in grey'
         },
-        {
-            //edit record form
-            //closeAfterEdit: true,
-            recreateForm: true,
-            beforeShowForm: function (e) {
-                var form = $(e[0]);
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                style_edit_form(form);
-            }
-        },
-        {
-            //new record form
-            closeAfterAdd: true,
-            recreateForm: true,
-            viewPagerButtons: false,
-            beforeShowForm: function (e) {
-                var form = $(e[0]);
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                style_edit_form(form);
-            }
-        },
+        //{
+        //    //edit record form
+        //    //closeAfterEdit: true,
+        //    recreateForm: true,
+        //    beforeShowForm: function (e) {
+        //        var form = $(e[0]);
+        //        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        //        style_edit_form(form);
+        //    }
+        //},
+        //{
+        //    //new record form
+        //    closeAfterAdd: true,
+        //    recreateForm: true,
+        //    viewPagerButtons: false,
+        //    beforeShowForm: function (e) {
+        //        var form = $(e[0]);
+        //        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        //        style_edit_form(form);
+        //    }
+        //},
         {
             //delete record form
             recreateForm: true,
@@ -194,7 +122,6 @@ $(document).ready(function(){
 
                 form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                 style_delete_form(form);
-
                 form.data('styled', true);
             },
             onClick: function (e) {
@@ -276,6 +203,7 @@ $(document).ready(function(){
 
         form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
         style_delete_form(form);
+
         form.data('styled', true);
     }
 
@@ -343,5 +271,4 @@ $(document).ready(function(){
         $('.navtable .ui-pg-button').tooltip({container: 'body'});
         $(table).find('.ui-pg-div').tooltip({container: 'body'});
     }
-
 });

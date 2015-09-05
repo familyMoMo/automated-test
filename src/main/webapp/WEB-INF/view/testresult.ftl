@@ -35,13 +35,13 @@
                     <b class="arrow icon-angle-down"></b>
                 </a>
                 <ul class="submenu">
-                    <li class="active">
+                    <li>
                         <a href="http://localhost:9090/automated/testcase/index">
                             <i class="icon-double-angle-right"></i>
                             测试用例
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="http://localhost:9090/automated/testcase/testResult">
                             <i class="icon-double-angle-right"></i>
                             测试结果
@@ -63,27 +63,26 @@
                 </li>
 
                 <li>
-                    <a href="grid.html">自动化测试用例</a>
+                    <a href="grid.html">测试结果</a>
                 </li>
-                <li class="active">测试用例</li>
+                <li class="active">测试结果</li>
             </ul>
         </div>
         <div class="page-content">
             <div class="page-header">
-                <form class="form-inline">
+                <form class="form-inline" method="post" action="http://localhost:9090/automated/testcase/removeTestResultsByTagName">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label no-padding-right" for="form-field-select-1">用例版本</label>
+                        <label class="col-sm-4 control-label no-padding-right" for="form-field-select-1">Tag</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="form-field-select-1">
-                                <#list versions as version>
-                                    <option id="${version.version}">${version.version}</option>
-                                </#list>
+                            <select class="form-control" id="form-field-select-1" name="tagName">
+                            <#list tagNames as tagName>
+                                <option id="${tagName}">${tagName}</option>
+                            </#list>
                             </select>
                         </div>
                     </div>
                     <button id="search" type="button" class="btn btn-purple btn-sm">查询<i class="icon-search icon-on-right bigger-110"></i></button>
-                    <button id="create" type="button" class="btn btn-purple btn-sm">创建新版本<i class=" icon-plus-sign-alt icon-on-right bigger-110"></i></button>
-                    <button id="excute" type="button" class="btn btn-purple btn-sm">执行该版本用例<i class=" icon-play icon-on-right bigger-110"></i></button>
+                    <button id="delete" type="submit" class="btn btn-purple btn-sm">删除该Tag<i class="icon-search icon-on-right bigger-110"></i></button>
                 </form>
             </div>
             <div class="row">
@@ -97,8 +96,8 @@
                             <i class="icon-remove"></i>
                         </button>
                     </div>
-                    <table id="grid-table"></table>
-                    <div id="grid-pager"></div>
+                    <table id="result-grid-table"></table>
+                    <div id="result-grid-pager"></div>
                 </div>
                 <script type="text/javascript">
                     var $path_base = "/";//this will be used in gritter alerts containing images
@@ -106,26 +105,6 @@
                 <!-- PAGE CONTENT ENDS -->
             </div><!-- /.col -->
         </div><!-- /.row -->
-        <div id="versionwrap">
-            <form id="versionform" role="form" method="post" action="http://localhost:9090/automated/testcase/addVersion">
-                <div class="form-group">
-                    <label for="version">Version</label>
-                    <input type="version" class="form-control"
-                           id="version" name="version">
-                </div>
-            </form>
-        </div>
-        <div id="tagnamewrap">
-            <form id="tagnameform" role="form" method="post" action="http://localhost:9090/automated/testcase/excuteTestCase">
-                <div class="form-group">
-                    <label for="tagName">Tag Name</label>
-                    <input type="text" class="form-control"
-                           id="tagName" name="tagName">
-                    <label for="hideVersion" style="display: none">Version</label>
-                    <input type="text" class="form-control" id="hideVersion" name="hideVersion" style="display: none">
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 </div>
@@ -138,6 +117,6 @@
 <script src="../assets/js/ace-extra.min.js"></script>
 <script src="../assets/js/jquery.bootstrap.min.js"></script>
 
-<script src="../assets/js/automated-test/index.js"></script>
+<script src="../assets/js/automated-test/testResult.js"></script>
 </body>
 </html>

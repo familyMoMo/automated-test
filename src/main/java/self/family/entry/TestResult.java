@@ -1,5 +1,7 @@
 package self.family.entry;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -96,6 +98,7 @@ public class TestResult implements Serializable{
         this.tagName = tagName;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
     public Date getCreateTime() {
         return createTime;
     }

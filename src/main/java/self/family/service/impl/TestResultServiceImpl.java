@@ -22,8 +22,13 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public boolean removeTestResultsByTag(int tag) {
-        return testResultDAO.removeTestResultsByTag(tag);
+    public List<String> findAllTagNames() {
+        return testResultDAO.findAllTagNames();
+    }
+
+    @Override
+    public boolean removeTestResultsByTagName(String tagName) {
+        return testResultDAO.removeTestResultsByTagName(tagName);
     }
 
     @Override
@@ -42,9 +47,13 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize) {
-        return testResultDAO.findPageResultByTag(tag, pageNumber, pageSize);
+    public PageVO<TestResult> findPageResultByTagName(String tagName, int pageNumber, int pageSize) {
+        return testResultDAO.findPageResultByTagName(tagName, pageNumber, pageSize);
     }
 
+    @Override
+    public boolean batchRemove(String[] ids) {
+        return testResultDAO.batchRemove(ids);
+    }
 
 }

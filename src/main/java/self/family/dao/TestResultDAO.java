@@ -17,8 +17,12 @@ public class TestResultDAO extends BaseDAO{
         return getSqlSession().selectList("findTestResultsByTag", tag);
     }
 
-    public boolean removeTestResultsByTag(int tag) {
-        return getSqlSession().delete("removeTestResultsByTag", tag) > 0 ? true : false;
+    public List<String> findAllTagNames() {
+        return getSqlSession().selectList("getAllTagNames");
+    }
+
+    public boolean removeTestResultsByTagName(String tagName) {
+        return getSqlSession().delete("removeTestResultsByTagName", tagName) > 0 ? true : false;
     }
 
     public int findMaxTag() {
@@ -38,9 +42,13 @@ public class TestResultDAO extends BaseDAO{
         return this.getPage("getPage", null, pageNumber, pageSize);
     }
 
-    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize) {
+    public PageVO<TestResult> findPageResultByTagName(String tagName, int pageNumber, int pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("tag", tag);
-        return this.getPage("findPageResultByTag", map, pageNumber, pageSize);
+        map.put("tagName", tagName);
+        return this.getPage("findPageResultByTagName", map, pageNumber, pageSize);
+    }
+
+    public boolean batchRemove(String[] ids){
+        return getSqlSession().delete("batchRemoveResult", ids) == ids.length ? true : false;
     }
 }

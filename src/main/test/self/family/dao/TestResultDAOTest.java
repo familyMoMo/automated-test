@@ -21,11 +21,6 @@ public class TestResultDAOTest extends BaseTest {
     }
 
     @Test
-    public void testRemoveTestResultsByTag() throws Exception {
-        System.out.println(testResultDAO.removeTestResultsByTag(0));
-    }
-
-    @Test
     public void testFindMaxTag() throws Exception {
         System.out.println(testResultDAO.findMaxTag());
     }
@@ -38,5 +33,10 @@ public class TestResultDAOTest extends BaseTest {
         testResults.add(new TestResult(1, "lala", "123", "123", "PASSED", 1, "o", new Date()));
         testResults.add(new TestResult(2, "lala", "123", "1234", "FAILED", 1, "oy", new Date()));
         System.out.println(testResultDAO.batchAdd(testResults));
+    }
+
+    @Test
+    public void testBatchRemove() throws Exception {
+        System.out.println(testResultDAO.batchRemove(new String[]{"7"}));
     }
 }

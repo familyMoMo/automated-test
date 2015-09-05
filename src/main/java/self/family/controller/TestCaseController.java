@@ -46,6 +46,11 @@ public class TestCaseController {
         return "testcase";
     }
 
+    @RequestMapping(value = "testResult")
+    public String testResult(Model model) {
+        model.addAttribute("tagNames", testResultService.findAllTagNames());
+        return "testresult";
+    }
     @RequestMapping(value = "addVersion")
     public String addVersion(TestVersion testVersion) {
         testVersionService.addVersion(testVersion);
@@ -83,21 +88,31 @@ public class TestCaseController {
     }
 
     @RequestMapping(value = "excuteTestCase")
-    public List<TestResult> excute(String version, String tagName) {
-        System.out.println(version + "---" + tagName);
-        return businessService.excute(testCaseService.findTestCasesByVersion(version), tagName);
+    public String excute(String hideVersion, String tagName) {
+        businessService.excute(testCaseService.findTestCasesByVersion(hideVersion), tagName);
+        return "redirect:/testcase/testResult";
     }
 
     @ResponseBody
-    @RequestMapping(value = "findPageResultByTag")
-    public PageVO<TestResult> findPageResultByTag(int tag, int page, int rows) {
-        return testResultService.findPageResultByTag(tag, page, rows);
+    @RequestMapping(value = "findPageResultByTagName")
+    public PageVO<TestResult> findPageResultByTagName(String tagName, int page, int rows, HttpServletRequest request) {
+        return testResultService.findPageResultByTagName(tagName, page, rows);
     }
 
-    @RequestMapping(value = "removeTestResultsByTag")
-    public boolean removeTestResultsByTag(int tag) {
-        return testResultService.removeTestResultsByTag(tag);
+    @RequestMapping(value = "removeTestResultsByTagName")
+    public String removeTestResultsByTagName(String tagName) {
+        System.out.println(tagName);
+        testResultService.removeTestResultsByTagName(tagName);
+        return "redirect:/testcase/testResult";
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "updateTestResult")
+    public boolean updateTestResult(HttpServletRequest request) {
+        String oper = request.getParameter("oper");
+        if (oper.equalsIgnoreCase("del")) {
+            return testResultService.batchRemove(request.getParameter("id").split(","));
+        }
+        return false;
+    }
 }

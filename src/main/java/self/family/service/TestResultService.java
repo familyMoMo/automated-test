@@ -12,7 +12,9 @@ import java.util.List;
 public interface TestResultService {
     public List<TestResult> findTestResultsByTag(int tag);
 
-    public boolean removeTestResultsByTag(int tag);
+    public List<String> findAllTagNames();
+
+    public boolean removeTestResultsByTagName(String tagName);
 
     public int findMaxTag();
 
@@ -20,5 +22,7 @@ public interface TestResultService {
 
     public boolean batchAdd(List<TestResult> testResults);
 
-    public PageVO<TestResult> findPageResultByTag(int tag, int pageNumber, int pageSize);
+    public PageVO<TestResult> findPageResultByTagName(String tagName, int pageNumber, int pageSize);
+
+    public boolean batchRemove(String[] ids);
 }

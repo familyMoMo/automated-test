@@ -15,7 +15,7 @@ public class TestResultServiceImplTest extends BaseTest {
     private TestResultService testResultService;
     @Test
     public void findPageResultByTag() {
-        PageVO<TestResult> resultVO = testResultService.findPageResultByTag(1, 1, 2);
+        PageVO<TestResult> resultVO = testResultService.findPageResultByTagName("1", 1, 2);
         System.out.println(resultVO.getRows().get(0).getCaseName());
     }
 }

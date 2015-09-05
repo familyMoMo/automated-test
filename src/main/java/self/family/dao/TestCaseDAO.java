@@ -30,7 +30,7 @@ public class TestCaseDAO extends BaseDAO{
     }
 
     public boolean batchRemove(String[] ids){
-        return getSqlSession().delete("batchRemove", ids) == ids.length ? true : false;
+        return getSqlSession().delete("batchRemoveCase", ids) == ids.length ? true : false;
     }
 
     public boolean updateTestCase(TestCase testCase){
