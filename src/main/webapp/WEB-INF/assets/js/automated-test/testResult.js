@@ -92,27 +92,27 @@ $(document).ready(function() {
             view: true,
             viewicon: 'icon-zoom-in grey'
         },
-        //{
-        //    //edit record form
-        //    //closeAfterEdit: true,
-        //    recreateForm: true,
-        //    beforeShowForm: function (e) {
-        //        var form = $(e[0]);
-        //        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-        //        style_edit_form(form);
-        //    }
-        //},
-        //{
-        //    //new record form
-        //    closeAfterAdd: true,
-        //    recreateForm: true,
-        //    viewPagerButtons: false,
-        //    beforeShowForm: function (e) {
-        //        var form = $(e[0]);
-        //        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-        //        style_edit_form(form);
-        //    }
-        //},
+        {
+            //edit record form
+            //closeAfterEdit: true,
+            recreateForm: true,
+            beforeShowForm: function (e) {
+                //var form = $(e[0]);
+                //form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                //style_edit_form(form);
+            }
+        },
+        {
+            //new record form
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            beforeShowForm: function (e) {
+                //var form = $(e[0]);
+                //form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                //style_edit_form(form);
+            }
+        },
         {
             //delete record form
             recreateForm: true,
